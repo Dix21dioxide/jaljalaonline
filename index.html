@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>रघुगंगा गाउँपालिका बजेट २०८२/०८३</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mukti:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Mukti', 'Noto Sans Devanagari', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="white" opacity="0.1"/><circle cx="30" cy="20" r="1.5" fill="white" opacity="0.1"/><circle cx="50" cy="15" r="1" fill="white" opacity="0.1"/><circle cx="70" cy="25" r="2" fill="white" opacity="0.1"/><circle cx="90" cy="10" r="1.5" fill="white" opacity="0.1"/></svg>');
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .tagline {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .main-content {
+            padding: 40px;
+        }
+        
+        .budget-highlight {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .budget-amount {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .budget-text {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card.current {
+            border-left-color: #FF6B6B;
+        }
+        
+        .stat-card.capital {
+            border-left-color: #4ECDC4;
+        }
+        
+        .stat-card.internal {
+            border-left-color: #45B7D1;
+        }
+        
+        .stat-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card.current .stat-value {
+            color: #FF6B6B;
+        }
+        
+        .stat-card.capital .stat-value {
+            color: #4ECDC4;
+        }
+        
+        .stat-card.internal .stat-value {
+            color: #45B7D1;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .programs-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            border-radius: 2px;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .program-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #4ECDC4;
+        }
+        
+        .program-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .program-text {
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: #555;
+        }
+        
+        .budget-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .breakdown-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .breakdown-amount {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .breakdown-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .location {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .budget-amount {
+                font-size: 2.5em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>रघुगंगा गाउँपालिका</h1>
+            <div class="tagline">"समृद्ध रघुगंगा, सुखी रघुगंगावासी"</div>
+        </header>
+        
+        <main class="main-content">
+            <div class="budget-highlight">
+                <div class="budget-amount">₹ ५० करोड ११ लाख</div>
+                <div class="budget-text">आर्थिक वर्ष २०८२/०८३ को कुल बजेट</div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card current">
+                    <div class="stat-value">₹ ३७.६८ करोड</div>
+                    <div class="stat-label">चालु खर्च</div>
+                    <div class="program-text">दैनिक सञ्चालन र कार्यक्रमहरूका लागि</div>
+                </div>
+                
+                <div class="stat-card capital">
+                    <div class="stat-value">₹ १२.४४ करोड</div>
+                    <div class="stat-label">पूँजीगत खर्च</div>
+                    <div class="program-text">पूर्वाधार विकास र निर्माण कार्यका लागि</div>
+                </div>
+                
+                <div class="stat-card internal">
+                    <div class="stat-value">₹ ३.६० करोड</div>
+                    <div class="stat-label">आन्तरिक आय</div>
+                    <div class="program-text">स्थानीय राजश्व र बचत रकम</div>
+                </div>
+            </div>
+            
+            <div class="programs-section">
+                <h2 class="section-title">मुख्य कार्यक्रमहरू</h2>
+                <div class="programs-grid">
+                    <div class="program-item">
+                        <div class="program-icon">👩‍💼</div>
+                        <div class="program-text"><strong>महिला उद्यमिता:</strong> उद्योग दर्ता निःशुल्क</div>
+                    </div>
+                    
+                    <div class="program-item">
+                        <div class="program-icon">🌾</div>
+                        <div class="program-text"><strong>कृषि अनुदान:</strong> सामग्री खरिदमा ७५% सम्म अनुदान</div>
+                    </div>
+                    
+                    <div class="program-item">
+                        <div class="program-icon">🐄</div>
+                        <div class="program-text"><strong>पशुपालन विकास:</strong> गुणस्तरीय नस्ल सुधार कार्यक्रम</div>
+                    </div>
+                    
+                    <div class="program-item">
+                        <div class="program-icon">🏔️</div>
+                        <div class="program-text"><strong>पर्यटन प्रवर्द्धन:</strong> स्थानीय पर्यटन स्थल विकास</div>
+                    </div>
+                    
+                    <div class="program-item">
+                        <div class="program-icon">🏥</div>
+                        <div class="program-text"><strong>स्वास्थ्य सेवा:</strong> गुणस्तरीय स्वास्थ्य सेवा विस्तार</div>
+                    </div>
+                    
+                    <div class="program-item">
+                        <div class="program-icon">📚</div>
+                        <div class="program-text"><strong>शिक्षा विकास:</strong> गुणस्तरीय शिक्षा प्रणाली</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="programs-section">
+                <h2 class="section-title">विशेष बजेट विनियोजन</h2>
+                <div class="budget-breakdown">
+                    <div class="breakdown-item">
+                        <div class="breakdown-amount">₹ १५.५ लाख</div>
+                        <div class="breakdown-label">औषधी र औषधीजन्य सामग्री</div>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <div class="breakdown-amount">₹ ७ लाख</div>
+                        <div class="breakdown-label">कुकुर व्यवस्थापन र रेबिज नियन्त्रण</div>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <div class="breakdown-amount">₹ ५ लाख</div>
+                        <div class="breakdown-label">भेडा बाख्रा उत्पादकत्व</div>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <div class="breakdown-amount">₹ ४ लाख</div>
+                        <div class="breakdown-label">पशु स्वास्थ्य शिविर</div>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <div class="breakdown-amount">₹ ३३.७२ लाख</div>
+                        <div class="breakdown-label">प्रधानमन्त्री रोजगार कार्यक्रम</div>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <div class="breakdown-amount">₹ ३ लाख</div>
+                        <div class="breakdown-label">बंगुरपालन विकास</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="programs-section">
+                <h2 class="section-title">लक्षित समुदाय</h2>
+                <div class="programs-grid">
+                    <div class="program-item">
+                        <div class="program-icon">👩</div>
+                        <div class="program-text">महिला उद्यमी</div>
+                    </div>
+                    
+                    <div class="program-item">
+                        <div class="program-icon">🤝</div>
+                        <div class="program-text">दलित समुदाय</div>
+                    </div>
+                    
+                    <div class="program-item">
+                        <div class="program-icon">♿</div>
+                        <div class="program-text">अपाङ्गता भएका व्यक्ति</div>
+                    </div>
+                    
+                    <div class="program-item">
+                        <div class="program-icon">🏠</div>
+                        <div class="program-text">विपन्न समुदाय</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <div class="location">
+                📍 म्याग्दी, रघुगंगा गाउँपालिका, मौवाफाँट
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
